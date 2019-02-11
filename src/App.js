@@ -63,7 +63,16 @@ class App extends React.Component {
                 country: data.sys.country,
                 sunrise: data.sys.sunrise,
                 sunset: sunset_date,
-                error: ""
+                error: undefined
+            });
+        } else {
+            this.setState({
+                temp: undefined,
+                city: undefined,
+                country: undefined,
+                sunrise: undefined,
+                sunset: undefined,
+                error: 'Введите название города'
             });
         }
     }
@@ -72,22 +81,33 @@ class App extends React.Component {
     // а внутри return
     render() {
         return(
-            <div>
-                <Info />
+            <div className='wrapper'>
+                <div className='main'>
+                    <div className='container'>
+                        <div className='row'>
+                            <div className='col-sm-5 info'>
+                                <Info />
+                            </div>
+                            <div className='col-sm-7 form'>
+                                {/* 
+                                    Передаем переменную weatherMethod в компонент Form *
+                                    this - обращаемся к этому класу - App *
+                                    gettingWeather - берем этот метод 
+                                */}
+                                <Form weatherMethod={this.gettingWeather} />
 
-                {/* Передаем переменную weatherMethod в компонент Form */}
-                {/* this - обращаемся к этому класу - App */}
-                {/* gettingWeather - берем этот метод */}
-                <Form weatherMethod={this.gettingWeather} />
-
-                <Weather
-                    temp={this.state.temp}
-                    city={this.state.city}
-                    country={this.state.country}
-                    sunrise={this.state.sunrise}
-                    sunset={this.state.sunset}
-                    error={this.state.error}
-                />
+                                <Weather
+                                    temp={this.state.temp}
+                                    city={this.state.city}
+                                    country={this.state.country}
+                                    sunrise={this.state.sunrise}
+                                    sunset={this.state.sunset}
+                                    error={this.state.error}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

@@ -1,21 +1,22 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-class Weather extends React.Component {
-    render() {
-        return (
-            <div>
-                { this.props.city && ( // проверяем не пусто ли в пропсах
-                    <div>
-                        <p>Местоположение: {this.props.city}, {this.props.country}</p>
-                        <p>Температура: {this.props.temp}</p>
-                        <p>Восход солнца: {this.props.sunrise}</p>
-                        <p>Заход солнца: {this.props.sunset}</p>
-                    </div>
-                )}
-            </div>
-        );
-    }
+const Weather = (props) => {
+    return (
+        <div className='infoWeath'>
+            { props.city && ( // проверяем не пусто ли в пропсах
+                <div>
+                    <p>Местоположение: {props.city}, {props.country}</p>
+                    <p>Температура: {props.temp}</p>
+                    <p>Восход солнца: {props.sunrise}</p>
+                    <p>Заход солнца: {props.sunset}</p>
+                </div>
+            )}
+            <p className='error'>
+                {props.error}
+            </p>
+        </div>
+    )
 }
 
 
@@ -32,6 +33,7 @@ Weather.propTypes = {
     temp: PropTypes.number,
     sunrise: PropTypes.number,
     sunset: PropTypes.string,
+    error: PropTypes.string,
 };
 
 export default Weather;
